@@ -34,9 +34,9 @@ class LoginButton extends StatelessWidget {
       margin: EdgeInsets.only(bottom: marginBottom),
       child: ElevatedButton(
           style: ButtonStyle(
-            padding: MaterialStateProperty.all(EdgeInsets.zero),
-            backgroundColor: MaterialStateProperty.all(bkgColor),
-            shape: MaterialStateProperty.all(RoundedRectangleBorder(
+            padding: WidgetStateProperty.all(EdgeInsets.zero),
+            backgroundColor: WidgetStateProperty.all(bkgColor),
+            shape: WidgetStateProperty.all(RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             )),
           ),

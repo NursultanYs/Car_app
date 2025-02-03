@@ -1,4 +1,4 @@
-import 'package:cap_app/features/auth/app_validators.dart';
+
 import 'package:flutter/material.dart';
 import 'package:cap_app/core/theme/app_textStyles.dart';
 import 'package:cap_app/core/extensensions/textStyle_extension.dart';
