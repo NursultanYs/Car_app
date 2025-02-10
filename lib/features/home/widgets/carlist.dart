@@ -1,5 +1,6 @@
 import 'package:cap_app/core/extensensions/textStyle_extension.dart';
 import 'package:cap_app/core/theme/app_textStyles.dart';
+import 'package:cap_app/features/details/detail_screen.dart';
 import 'package:cap_app/features/home/models/cars_data.dart';
 import 'package:cap_app/features/home/providers/favorite_provider.dart';
 import 'package:flutter/material.dart';
@@ -22,69 +23,80 @@ class _CarListViewState extends State<CarListView> {
 
     return Expanded(
       child: ListView.separated(
-        itemBuilder: (context, index) => Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              width: 200,
-              height: 150,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.network(
-                  widget.cartList[index].image,
-                  fit: BoxFit.cover,
+        itemBuilder: (context, index) => GestureDetector(
+          onTap: () => {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => DetailScreen(
+                        item: carsData[index],
+                      )),
+            )
+          },
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: 200,
+                height: 150,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image.network(
+                    widget.cartList[index].image,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(
-              width: 20,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.cartList[index].mark,
-                      style: AppTextstyles.bold.withFontSize(25),
-                    ),
-                    Text(
-                      " ${widget.cartList[index].model} ${widget.cartList[index].year}",
-                      style: AppTextstyles.medium.withFontSize(20),
-                    )
-                  ],
-                ),
-                Row(
-                  children: [
-                    IconButton(
-                        onPressed: () {
-                          context.read<FavoriteProvider>().changeFavorite(
-                              newFavorite: widget.cartList[index]);
-                        },
-                        icon: Icon(
-                          Icons.favorite,
-                          color: list.contains(widget.cartList[index])
-                              ? Colors.red
-                              : Colors.grey,
-                        )),
-                    IconButton(
-                        onPressed: () {
-                          context
-                              .read<FavoriteProvider>()
-                              .changeCart(newCart: widget.cartList[index]);
-                        },
-                        icon: Icon(
-                          Icons.shopping_cart_outlined,
-                          color: listCart.contains(widget.cartList[index])
-                              ? Colors.red
-                              : Colors.grey,
-                        ))
-                  ],
-                )
-              ],
-            )
-          ],
+              const SizedBox(
+                width: 20,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.cartList[index].mark,
+                        style: AppTextstyles.bold.withFontSize(25),
+                      ),
+                      Text(
+                        " ${widget.cartList[index].model} ${widget.cartList[index].year}",
+                        style: AppTextstyles.medium.withFontSize(20),
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      IconButton(
+                          onPressed: () {
+                            context.read<FavoriteProvider>().changeFavorite(
+                                newFavorite: widget.cartList[index]);
+                          },
+                          icon: Icon(
+                            Icons.favorite,
+                            color: list.contains(widget.cartList[index])
+                                ? Colors.red
+                                : Colors.grey,
+                          )),
+                      IconButton(
+                          onPressed: () {
+                            context
+                                .read<FavoriteProvider>()
+                                .changeCart(newCart: widget.cartList[index]);
+                          },
+                          icon: Icon(
+                            Icons.shopping_cart_outlined,
+                            color: listCart.contains(widget.cartList[index])
+                                ? Colors.red
+                                : Colors.grey,
+                          ))
+                    ],
+                  )
+                ],
+              )
+            ],
+          ),
         ),
         separatorBuilder: (context, index) => const SizedBox(
           height: 10,
